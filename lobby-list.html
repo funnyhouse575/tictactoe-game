@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список лобби - Крестики-нолики</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="lobby-list-container">
+        <div class="lobby-list-header">
+            <button class="back-btn" id="backBtn">← Назад</button>
+            <h1>Список лобби</h1>
+            <button class="refresh-btn" id="refreshBtn">🔄 Обновить</button>
+        </div>
+
+        <div class="lobby-filters">
+            <div class="filter-group">
+                <label for="gameTypeFilter">Тип игры:</label>
+                <select id="gameTypeFilter">
+                    <option value="all">Все</option>
+                    <option value="normal">Обычная</option>
+                    <option value="super">Супер игра</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="privacyFilter">Приватность:</label>
+                <select id="privacyFilter">
+                    <option value="all">Все</option>
+                    <option value="public">Публичные</option>
+                    <option value="private">Приватные</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="lobbies-list" id="lobbiesList">
+            <!-- Список лобби будет здесь -->
+        </div>
+
+        <div class="empty-state hidden" id="emptyState">
+            <p>😔 Нет доступных лобби</p>
+            <p>Создайте свое лобби или попробуйте обновить список</p>
+        </div>
+
+        <div class="loading-state" id="loadingState">
+            <p>Загрузка лобби...</p>
+        </div>
+    </div>
+
+    <!-- Модальное окно для пароля приватного лобби -->
+    <div id="passwordModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Введите пароль</h2>
+            <div class="input-group">
+                <input type="password" id="lobbyPasswordInput" placeholder="Пароль лобби">
+            </div>
+            <div class="modal-buttons">
+                <button class="modal-btn create-btn" id="confirmPassword">
+                    ✅ Войти
+                </button>
+                <button class="modal-btn cancel-btn" id="cancelPassword">
+                    ❌ Отмена
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

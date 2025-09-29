@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ожидание игроков - Крестики-нолики</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="lobby-container">
+        <div class="lobby-header">
+            <button class="back-btn" id="backBtn">← Назад</button>
+            <h1>Ожидание игроков</h1>
+            <button class="copy-btn" id="copyBtn">📋 Копировать ID</button>
+        </div>
+
+        <div class="lobby-info">
+            <div class="lobby-card">
+                <h2 id="lobbyName">Название лобби</h2>
+                <div class="lobby-details">
+                    <div class="detail">
+                        <span class="label">ID лобби:</span>
+                        <span class="value" id="lobbyId">XXXXXX</span>
+                    </div>
+                    <div class="detail">
+                        <span class="label">Создатель:</span>
+                        <span class="value" id="lobbyCreator">Игрок</span>
+                    </div>
+                    <div class="detail">
+                        <span class="label">Тип игры:</span>
+                        <span class="value" id="lobbyType">Обычная</span>
+                    </div>
+                    <div class="detail">
+                        <span class="label">Статус:</span>
+                        <span class="value status-waiting" id="lobbyStatus">Ожидание</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="players-section">
+            <h3>Игроки в лобби (<span id="playersCount">1</span>/2)</h3>
+            <div class="players-list" id="playersList">
+                <!-- Игроки будут добавляться здесь -->
+            </div>
+        </div>
+
+        <div class="lobby-controls">
+            <button class="start-btn hidden" id="startBtn">🎮 Начать игру</button>
+            <button class="leave-btn" id="leaveBtn">🚪 Покинуть лобби</button>
+        </div>
+
+        <div class="chat-section">
+            <h3>Чат лобби</h3>
+            <div class="chat-messages" id="chatMessages">
+                <!-- Сообщения чата -->
+            </div>
+            <div class="chat-input">
+                <input type="text" id="chatInput" placeholder="Введите сообщение...">
+                <button id="sendBtn">📤</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

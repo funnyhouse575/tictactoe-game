@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Крестики-нолики - Меню</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="menu-container">
+        <div class="header-bar">
+            <button class="logout-btn" id="logoutBtn">Выйти</button>
+        </div>
+
+        <h1 class="game-title">КРЕСТИКИ-НОЛИКИ</h1>
+
+        <div class="menu-content">
+            <!-- Левая колонка - Обычная игра -->
+            <div class="menu-column">
+                <h2>Обычная игра</h2>
+                <button class="menu-btn" id="quickGame">Быстрая игра</button>
+                <button class="menu-btn" id="createLobby">Создать лобби</button>
+                <button class="menu-btn" id="viewLobbies">Список лобби</button>
+            </div>
+
+            <!-- Центральная область - Звание и статистика -->
+            <div class="menu-center">
+                <div class="user-stats">
+                    <div class="user-rank">
+                        <span class="rank-title">Звание:</span>
+                        <span class="rank-value" id="userRank">Новичок</span>
+                    </div>
+                    <div class="user-vvh">
+                        <span class="vvh-title">VVH:</span>
+                        <span class="vvh-value" id="userVvh">0</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Правая колонка - Супер игра -->
+            <div class="menu-column">
+                <h2>Супер игра</h2>
+                <button class="menu-btn" id="ratedGame">Рейтинговая игра</button>
+                <button class="menu-btn" id="unratedGame">Не рейтинговая игра</button>
+                <button class="menu-btn" id="createSuperLobby">Создать лобби</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно выбора противника -->
+    <div id="opponentModal" class="modal hidden">
+        <div class="modal-content">
+            <h2>Выберите противника</h2>
+            <div class="modal-buttons">
+                <button class="modal-btn computer-btn" id="vsComputer">
+                    🖥️ Играть с компьютером
+                </button>
+                <button class="modal-btn player-btn" id="vsPlayer">
+                    👤 Играть с игроком
+                </button>
+                <button class="modal-btn cancel-btn" id="cancelGame">
+                    ❌ Отмена
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Модальное окно создания лобби -->
+<div id="createLobbyModal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Создать лобби</h2>
+        <div class="lobby-form">
+            <div class="input-group">
+                <label for="lobbyName">Название лобби:</label>
+                <input type="text" id="lobbyName" placeholder="Введите название" maxlength="20">
+            </div>
+
+            <div class="input-group">
+                <label for="lobbyType">Тип игры:</label>
+                <select id="lobbyType">
+                    <option value="normal">Обычная игра</option>
+                    <option value="super">Супер игра</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="lobbyPrivacy">Приватность:</label>
+                <select id="lobbyPrivacy">
+                    <option value="public">Публичное</option>
+                    <option value="private">Приватное</option>
+                </select>
+            </div>
+
+            <div class="input-group hidden" id="passwordGroup">
+                <label for="lobbyPassword">Пароль:</label>
+                <input type="password" id="lobbyPassword" placeholder="Введите пароль">
+            </div>
+        </div>
+
+        <div class="modal-buttons">
+            <button class="modal-btn create-btn" id="confirmCreateLobby">
+                🎮 Создать лобби
+            </button>
+            <button class="modal-btn cancel-btn" id="cancelCreateLobby">
+                ❌ Отмена
+            </button>
+        </div>
+    </div>
+</div>
+
+    <script src="script.js"></script>
+</body>
+</html>

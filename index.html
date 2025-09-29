@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Крестики-нолики - Вход</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-form">
+            <h1>🎯 Крестики-нолики</h1>
+            <p>Введите ваш ник и пароль</p>
+
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="username">Никнейм:</label>
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        required
+                        minlength="3"
+                        maxlength="15"
+                        placeholder="Введите ваш ник"
+                    >
+                </div>
+
+                <div class="input-group">
+                    <label for="password">Пароль:</label>
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        required
+                        minlength="4"
+                        placeholder="Введите пароль"
+                    >
+                </div>
+
+                <button type="submit" class="login-btn">Войти в игру</button>
+            </form>
+
+            <div class="guest-option">
+                <p>Или <a href="#" id="guestLogin">войти как гость</a></p>
+            </div>
+
+            <div id="message" class="message hidden"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

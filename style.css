@@ -1,0 +1,881 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background: white;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-form h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 2em;
+}
+
+.login-form p {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.login-btn:hover {
+    transform: translateY(-2px);
+}
+
+.login-btn:active {
+    transform: translateY(0);
+}
+
+.guest-option {
+    text-align: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.guest-option a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.guest-option a:hover {
+    text-decoration: underline;
+}
+
+.message {
+    margin-top: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+}
+
+.message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.message.hidden {
+    display: none;
+}
+
+/* Стили для игрового меню */
+.menu-container {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 800px;
+    margin: 20px auto;
+}
+
+.game-title {
+    text-align: center;
+    color: #333;
+    font-size: 2.5em;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.menu-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
+}
+
+.menu-column {
+    flex: 1;
+    text-align: center;
+}
+
+.menu-column h2 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 1.5em;
+}
+
+.menu-center {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 150px;
+}
+
+.user-stats {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    min-width: 150px;
+}
+
+.user-rank, .user-vvh {
+    margin: 10px 0;
+}
+
+.rank-title, .vvh-title {
+    display: block;
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
+.rank-value, .vvh-value {
+    display: block;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.menu-btn {
+    width: 100%;
+    padding: 12px;
+    margin: 8px 0;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.menu-btn:hover {
+    background: #5a6fd8;
+    transform: translateY(-2px);
+}
+
+.menu-btn:active {
+    transform: translateY(0);
+}
+.header-bar {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+
+.logout-btn {
+    padding: 8px 16px;
+    background: #ff6b6b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.logout-btn:hover {
+    background: #ff5252;
+}
+
+/* Стили для игрового поля */
+.game-container {
+    max-width: 400px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    padding: 8px 16px;
+    background: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.back-btn:hover {
+    background: #5a6268;
+}
+
+.game-header h1 {
+    color: #333;
+    margin: 0;
+}
+
+.game-info {
+    text-align: right;
+}
+
+.player-info {
+    font-size: 14px;
+    color: #666;
+}
+
+/* Игровое поле */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 10px;
+    margin: 20px 0;
+}
+
+.cell {
+    aspect-ratio: 1;
+    background: #f8f9fa;
+    border: 2px solid #dee2e6;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.cell:hover {
+    background: #e9ecef;
+    transform: scale(1.05);
+}
+
+.cell.x {
+    color: #dc3545;
+}
+
+.cell.o {
+    color: #007bff;
+}
+
+.cell.winner {
+    background: #d4edda;
+    border-color: #c3e6cb;
+}
+
+/* Статус игры */
+.game-status {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#statusMessage {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 15px;
+    min-height: 30px;
+}
+
+.restart-btn {
+    padding: 10px 20px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.restart-btn:hover {
+    background: #218838;
+}
+
+.status-win {
+    color: #28a745;
+}
+
+.status-draw {
+    color: #ffc107;
+}
+
+.status-turn {
+    color: #007bff;
+}
+/* Стили для модального окна */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.modal-content h2 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.modal-btn {
+    padding: 15px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.modal-btn:hover {
+    transform: translateY(-2px);
+}
+
+.computer-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.player-btn {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+}
+
+.cancel-btn {
+    background: #6c757d;
+    color: white;
+    margin-top: 10px;
+}
+
+/* Стили для формы создания лобби */
+.lobby-form {
+    text-align: left;
+    margin: 20px 0;
+}
+
+.lobby-form .input-group {
+    margin-bottom: 15px;
+}
+
+.lobby-form label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+    font-weight: bold;
+}
+
+.lobby-form input,
+.lobby-form select {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+.lobby-form input:focus,
+.lobby-form select:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+.create-btn {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: white;
+}
+
+/* Стили для страницы ожидания лобби */
+.lobby-container {
+    max-width: 600px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.lobby-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.lobby-header h1 {
+    color: #333;
+    margin: 0;
+}
+
+.copy-btn {
+    padding: 8px 16px;
+    background: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.copy-btn:hover {
+    background: #138496;
+}
+
+.lobby-info {
+    margin-bottom: 20px;
+}
+
+.lobby-card {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+}
+
+.lobby-card h2 {
+    margin-top: 0;
+    color: #333;
+}
+
+.lobby-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.detail {
+    display: flex;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+
+.label {
+    font-weight: bold;
+    color: #666;
+}
+
+.value {
+    color: #333;
+}
+
+.status-waiting {
+    color: #ffc107;
+    font-weight: bold;
+}
+
+.status-playing {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.players-section {
+    margin-bottom: 20px;
+}
+
+.players-section h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.players-list {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    min-height: 100px;
+}
+
+.player-item {
+    padding: 10px;
+    margin: 5px 0;
+    background: white;
+    border-radius: 5px;
+    border-left: 4px solid #667eea;
+}
+
+.player-creator {
+    border-left-color: #28a745;
+}
+
+.lobby-controls {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.start-btn {
+    padding: 12px 24px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.start-btn:hover {
+    background: #218838;
+}
+
+.leave-btn {
+    padding: 12px 24px;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.leave-btn:hover {
+    background: #c82333;
+}
+
+.chat-section {
+    border-top: 1px solid #dee2e6;
+    padding-top: 20px;
+}
+
+.chat-section h3 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.chat-messages {
+    height: 200px;
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    overflow-y: auto;
+}
+
+.chat-message {
+    margin-bottom: 8px;
+    padding: 5px;
+}
+
+.message-system {
+    color: #6c757d;
+    font-style: italic;
+}
+
+.message-player {
+    color: #333;
+}
+
+.chat-input {
+    display: flex;
+    gap: 10px;
+}
+
+.chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+}
+
+.chat-input button {
+    padding: 10px 15px;
+    background: #667eea;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* Стили для списка лобби */
+.lobby-list-container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.lobby-list-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.lobby-list-header h1 {
+    color: #333;
+    margin: 0;
+}
+
+.refresh-btn {
+    padding: 8px 16px;
+    background: #17a2b8;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.refresh-btn:hover {
+    background: #138496;
+}
+
+.lobby-filters {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 10px;
+}
+
+.filter-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filter-group label {
+    font-weight: bold;
+    color: #333;
+}
+
+.filter-group select {
+    padding: 5px 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.lobbies-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.lobby-item {
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    border: 2px solid #e9ecef;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.lobby-item:hover {
+    background: #e9ecef;
+    transform: translateY(-2px);
+}
+
+.lobby-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.lobby-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.lobby-type {
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.lobby-type.normal {
+    background: #667eea;
+    color: white;
+}
+
+.lobby-type.super {
+    background: #f093fb;
+    color: white;
+}
+
+.lobby-details-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.lobby-detail {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: #666;
+}
+
+.lobby-players {
+    color: #28a745;
+    font-weight: bold;
+}
+
+.lobby-privacy {
+    padding: 2px 6px;
+    border-radius: 8px;
+    font-size: 0.7em;
+    font-weight: bold;
+}
+
+.privacy-public {
+    background: #28a745;
+    color: white;
+}
+
+.privacy-private {
+    background: #6c757d;
+    color: white;
+}
+
+.lobby-creator {
+    color: #333;
+}
+
+.empty-state, .loading-state {
+    text-align: center;
+    padding: 40px;
+    color: #666;
+}
+
+.empty-state p:first-child {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.lobby-full {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.lobby-full:hover {
+    transform: none;
+    background: #f8f9fa;
+}
+
+/* Стили для multiplayer */
+.lobby-info {
+    font-size: 0.8em;
+    color: #666;
+    margin-top: 5px;
+}
+
+.player-turn {
+    background: #fff3cd;
+    border-color: #ffeaa7;
+}
+
+.player-waiting {
+    opacity: 0.7;
+}
+
+.status-waiting-opponent {
+    color: #ffc107;
+}
+
+.opponent-disconnected {
+    color: #dc3545;
+}
+
+.game-timer {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+.timer-warning {
+    color: #dc3545;
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Крестики-нолики - Игра</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- В game-board.html обнови game-header -->
+    <div class="game-header">
+        <button class="back-btn" id="backBtn">← Назад</button>
+        <h1 id="gameTitle">Мультиплеер</h1>
+        <div class="game-info">
+            <div class="player-info">
+                <span>Вы: <strong id="currentPlayer">X</strong></span>
+                <span id="opponentInfo"></span>
+            </div>
+            <div class="lobby-info" id="lobbyInfo">
+                <small>Лобби: <span id="lobbyIdDisplay">XXXXXX</span></small>
+            </div>
+        </div>
+    </div>
+
+    <div class="game-container">
+        <div class="game-header">
+            <button class="back-btn" id="backBtn">← Назад</button>
+            <h1 id="gameTitle">Быстрая игра</h1>
+            <div class="game-info">
+                <div class="player-info">
+                    <span>Вы: <strong id="currentPlayer">X</strong></span>
+                    <span id="opponentType"></span>
+                </div>
+            </div>
+    </div>
+
+        <div class="game-board" id="gameBoard">
+            <!-- Игровое поле 3x3 -->
+            <div class="cell" data-index="0"></div>
+            <div class="cell" data-index="1"></div>
+            <div class="cell" data-index="2"></div>
+            <div class="cell" data-index="3"></div>
+            <div class="cell" data-index="4"></div>
+            <div class="cell" data-index="5"></div>
+            <div class="cell" data-index="6"></div>
+            <div class="cell" data-index="7"></div>
+            <div class="cell" data-index="8"></div>
+        </div>
+
+        <div class="game-status">
+            <div id="statusMessage">Ваш ход!</div>
+            <button class="restart-btn" id="restartBtn">Новая игра</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
