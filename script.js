@@ -460,8 +460,15 @@ function initGame() {
             initMultiplayerGame();
         } else {
             updateStatusMessage('Ваш ход!', 'status-turn');
+
+            // Если игра с компьютером и компьютер ходит первым
             if (gameType === 'computer' && currentPlayer === 'O') {
-                makeComputerMove();
+                console.log('Computer starts first');
+                // Блокируем поле и запускаем ход компьютера
+                lockGameBoard();
+                setTimeout(() => {
+                    makeComputerMove();
+                }, 1000);
             }
         }
     }
