@@ -95,6 +95,34 @@
         });
 
         function makeComputerMove() {
+                console.log('Computer thinking...');
+                console.log('Current board:', gameBoard);
+
+                if (!gameActive) return;
+
+                // Простой AI
+                let move = findWinningMove('O') || findWinningMove('X') || findRandomMove();
+
+                console.log('Computer chose move:', move);
+
+                // Если ход не найден, ищем первую пустую ячейку
+                if (move === -1) {
+                    console.log('Fallback: finding first empty cell');
+                    for (let i = 0; i < gameBoard.length; i++) {
+                        if (gameBoard[i] === '') {
+                            move = i;
+                            break;
+                        }
+                    }
+                }
+
+                if (move !== -1 && gameBoard[move] === '') {
+                    gameBoard[move] = 'O';
+                    const cell = document.querySelector(`.cell[data-index="${move}"]`);
+                    cell.textContent = 'O';
+                    cell.classList.add('o');
+
+                    console.log('Computer moved to:', move);
             console.log('Computer thinking...');
             console.log('Current board:', gameBoard);
 
@@ -135,6 +163,10 @@
                 statusMessage.textContent = 'Ваш ход!';
                 unlockGameBoard();
                 console.log('Player turn again');
+
+                } else {
+        console.log('No valid move found!');
+    }
             }
         }
 
@@ -167,12 +199,24 @@
             return -1;
         }
 
-        function findRandomMove() {
-            const emptyCells = [];
-            for (let i = 0; i < gameBoard.length; i++) {
-                if (gameBoard[i] === '') {
-                    emptyCells.push(i);
+            function findRandomMove() {
+                const emptyCells = [];
+                for (let i = 0; i < gameBoard.length; i++) {
+                    if (gameBoard[i] === '') {
+                        emptyCells.push(i);
+                    }
                 }
+
+                console.log('Empty cells for random move:', emptyCells);
+
+                if (emptyCells.length > 0) {
+                    const randomIndex = Math.floor(Math.random() * emptyCells.length);
+                    console.log('Random index:', randomIndex, 'Selected move:', emptyCells[randomIndex]);
+                    return emptyCells[randomIndex];
+                }
+
+                console.log('No empty cells found!');
+                return -1;
             }
 
             console.log('Empty cells for random move:', emptyCells);
