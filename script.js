@@ -421,6 +421,9 @@ function stopGamePolling() {
 
 // ===== ОСНОВНАЯ ИГРОВАЯ ЛОГИКА =====
 function initGame() {
+    console.log('=== INIT GAME CALLED ===');
+    console.log('Game type:', localStorage.getItem('gameType'));
+    console.log('Current player:', currentPlayer);
     const gameType = localStorage.getItem('gameType') || 'player';
     const gameTitle = document.getElementById('gameTitle');
     const opponentType = document.getElementById('opponentType');
