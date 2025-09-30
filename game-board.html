@@ -7,6 +7,258 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <script>
+    // Простая игра с компьютером
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('Game board loaded - Computer mode');
+
+        let currentPlayer = 'X';
+        let gameBoard = ['', '', '', '', '', '', '', '', ''];
+        let gameActive = true;
+
+        const cells = document.querySelectorAll('.cell');
+        const statusMessage = document.getElementById('statusMessage');
+        const gameType = localStorage.getItem('gameType') || 'player';
+
+        console.log('Game type:', gameType);
+        console.log('Cells found:', cells.length);
+
+        // Обновляем заголовок для игры с компьютером
+        if (gameType === 'computer') {
+            const gameTitle = document.getElementById('gameTitle');
+            if (gameTitle) gameTitle.textContent = 'Игра с компьютером';
+
+            const opponentType = document.getElementById('opponentType');
+            if (opponentType) opponentType.textContent = ' vs 🤖 Компьютер';
+        }
+
+        // Обработчик клика по ячейкам
+        cells.forEach(cell => {
+            cell.addEventListener('click', function(e) {
+                if (!gameActive) return;
+
+                const index = parseInt(e.target.getAttribute('data-index'));
+                console.log('Cell clicked:', index, 'Current player:', currentPlayer);
+
+                // Если игра с компьютером и не ход игрока - игнорируем
+                if (gameType === 'computer' && currentPlayer !== 'X') {
+                    console.log('Not player turn');
+                    return;
+                }
+
+                if (gameBoard[index] !== '') {
+                    console.log('Cell already occupied');
+                    return;
+                }
+
+                // Ход игрока
+                gameBoard[index] = currentPlayer;
+                e.target.textContent = currentPlayer;
+                e.target.classList.add(currentPlayer.toLowerCase());
+                console.log('Player moved to:', index);
+
+                // Проверка победы
+                if (checkWin()) {
+                    gameActive = false;
+                    statusMessage.textContent = `Поздравляем! ${currentPlayer} победил!`;
+                    highlightWinningCells();
+                    console.log('Player won!');
+                    return;
+                }
+
+                // Проверка ничьи
+                if (checkDraw()) {
+                    gameActive = false;
+                    statusMessage.textContent = 'Ничья!';
+                    console.log('Draw!');
+                    return;
+                }
+
+                // Если игра с компьютером - ход компьютера
+                if (gameType === 'computer') {
+                    currentPlayer = 'O';
+                    statusMessage.textContent = 'Ход компьютера...';
+                    console.log('Computer turn started');
+
+                    // Блокируем поле на время хода компьютера
+                    lockGameBoard();
+
+                    setTimeout(() => {
+                        makeComputerMove();
+                    }, 1000);
+                } else {
+                    // Локальная игра - просто меняем игрока
+                    currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+                    statusMessage.textContent = `Ход игрока ${currentPlayer}`;
+                }
+            });
+        });
+
+        function makeComputerMove() {
+            console.log('Computer thinking...');
+            console.log('Current board:', gameBoard);
+
+            if (!gameActive) return;
+
+            // Простой AI
+            let move = findWinningMove('O') || findWinningMove('X') || findRandomMove();
+
+            console.log('Computer chose move:', move);
+
+            if (move !== -1) {
+                gameBoard[move] = 'O';
+                const cell = document.querySelector(`.cell[data-index="${move}"]`);
+                cell.textContent = 'O';
+                cell.classList.add('o');
+
+                console.log('Computer moved to:', move);
+
+                // Проверка победы компьютера
+                if (checkWin()) {
+                    gameActive = false;
+                    statusMessage.textContent = 'Компьютер победил!';
+                    highlightWinningCells();
+                    console.log('Computer won!');
+                    return;
+                }
+
+                // Проверка ничьи
+                if (checkDraw()) {
+                    gameActive = false;
+                    statusMessage.textContent = 'Ничья!';
+                    console.log('Draw!');
+                    return;
+                }
+
+                // Возвращаем ход игроку
+                currentPlayer = 'X';
+                statusMessage.textContent = 'Ваш ход!';
+                unlockGameBoard();
+                console.log('Player turn again');
+            }
+        }
+
+        function findWinningMove(player) {
+            const winPatterns = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            for (let pattern of winPatterns) {
+                const [a, b, c] = pattern;
+                let playerCount = 0;
+                let emptyIndex = -1;
+
+                if (gameBoard[a] === player) playerCount++;
+                else if (gameBoard[a] === '') emptyIndex = a;
+
+                if (gameBoard[b] === player) playerCount++;
+                else if (gameBoard[b] === '') emptyIndex = b;
+
+                if (gameBoard[c] === player) playerCount++;
+                else if (gameBoard[c] === '') emptyIndex = c;
+
+                if (playerCount === 2 && emptyIndex !== -1) {
+                    console.log(`Found ${player === 'O' ? 'winning' : 'blocking'} move:`, emptyIndex);
+                    return emptyIndex;
+                }
+            }
+            return -1;
+        }
+
+        function findRandomMove() {
+            const emptyCells = [];
+            for (let i = 0; i < gameBoard.length; i++) {
+                if (gameBoard[i] === '') {
+                    emptyCells.push(i);
+                }
+            }
+
+            console.log('Empty cells for random move:', emptyCells);
+
+            if (emptyCells.length > 0) {
+                const randomIndex = Math.floor(Math.random() * emptyCells.length);
+                return emptyCells[randomIndex];
+            }
+            return -1;
+        }
+
+        function lockGameBoard() {
+            cells.forEach(cell => {
+                cell.style.pointerEvents = 'none';
+            });
+        }
+
+        function unlockGameBoard() {
+            cells.forEach(cell => {
+                cell.style.pointerEvents = 'auto';
+            });
+        }
+
+        function checkWin() {
+            const winPatterns = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            return winPatterns.some(pattern => {
+                const [a, b, c] = pattern;
+                return gameBoard[a] !== '' &&
+                       gameBoard[a] === gameBoard[b] &&
+                       gameBoard[a] === gameBoard[c];
+            });
+        }
+
+        function checkDraw() {
+            return gameBoard.every(cell => cell !== '');
+        }
+
+        function highlightWinningCells() {
+            const winPatterns = [
+                [0, 1, 2], [3, 4, 5], [6, 7, 8],
+                [0, 3, 6], [1, 4, 7], [2, 5, 8],
+                [0, 4, 8], [2, 4, 6]
+            ];
+
+            for (let pattern of winPatterns) {
+                const [a, b, c] = pattern;
+                if (gameBoard[a] !== '' && gameBoard[a] === gameBoard[b] && gameBoard[a] === gameBoard[c]) {
+                    pattern.forEach(index => {
+                        const cell = document.querySelector(`.cell[data-index="${index}"]`);
+                        if (cell) cell.classList.add('winner');
+                    });
+                    break;
+                }
+            }
+        }
+
+        // Кнопка перезапуска
+        const restartBtn = document.getElementById('restartBtn');
+        if (restartBtn) {
+            restartBtn.addEventListener('click', function() {
+                gameBoard = ['', '', '', '', '', '', '', '', ''];
+                gameActive = true;
+                currentPlayer = 'X';
+
+                cells.forEach(cell => {
+                    cell.textContent = '';
+                    cell.className = 'cell';
+                    cell.style.pointerEvents = 'auto';
+                });
+
+                statusMessage.textContent = 'Ваш ход!';
+
+                if (gameType === 'computer' && currentPlayer === 'O') {
+                    setTimeout(() => {
+                        makeComputerMove();
+                    }, 500);
+                }
+            });
+        }
+    });
+    </script>
     <!-- В game-board.html обнови game-header -->
     <div class="game-header">
         <button class="back-btn" id="backBtn">← Назад</button>
